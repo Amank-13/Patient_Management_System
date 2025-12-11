@@ -1,0 +1,13 @@
+
+### request
+POST http://localhost:8080/api/patients/addPatient
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Aman k",
+  "email": "john.doe@example.com",
+  "address": "123 Main St, Springfield",
+  "dateOfBirth": "1985-01-13",
+  "registrationDate": "2025-11-03"
+}

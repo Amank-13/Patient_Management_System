@@ -1,0 +1,15 @@
+// Status: 500, time: 265ms, size: 119 B
+### request
+GET http://localhost:8080/api/patients/hello HTTP/1.1
+connection: close
+content-type: application/json
+date: Sun, 07 Dec 2025 17:03:01 GMT
+transfer-encoding: chunked
+
+{
+  "timestamp": "2025-12-07T17:03:01.292+00:00",
+  "status": 500,
+  "error": "Internal Server Error",
+  "path": "/api/patients/hello"
+}
+>> C:\Users\amank\OneDrive\Documents\intellij_projects\Patient_Management_System\.idea\httpClient\12-07\request\2025-12-07T223301.json

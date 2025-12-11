@@ -1,0 +1,13 @@
+// Status: 400, time: 10ms, size: 71 B
+### request
+POST http://localhost:8080/api/patients/addPatient HTTP/1.1
+connection: close
+content-type: application/json
+date: Wed, 10 Dec 2025 17:58:19 GMT
+transfer-encoding: chunked
+
+{
+  "address": "Address can not be blank",
+  "email": "Email can not be blank"
+}
+>> C:\Users\amank\OneDrive\Documents\intellij_projects\Patient_Management_System\.idea\httpClient\12-10\request\2025-12-10T232819.json

@@ -1,0 +1,4 @@
+
+### request
+GET http://localhost:8080/api/patients/getPatients
+Accept: application/json

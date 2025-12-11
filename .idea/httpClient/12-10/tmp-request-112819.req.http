@@ -1,0 +1,14 @@
+// Size: 122 B
+### request
+POST http://localhost:8080/api/patients/addPatient HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Content-Length: 122
+
+{
+  "name": "Aman k",
+  "email": "",
+  "address": "",
+  "dateOfBirth": "1985-01-13",
+  "registrationDate": "2025-11-03"
+}
