@@ -1,5 +1,6 @@
 package com.aman.patientService.dto;
 
+import com.aman.patientService.dto.validators.CreatePatientValidationGroup;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,7 +22,7 @@ public class PatientRequestDTO {
     @NotBlank(message = "Date of Birth can not be blank")
     private String dateOfBirth;
 
-    @NotNull(message = "Registration Date can not be null")
+    @NotBlank(groups = CreatePatientValidationGroup.class, message = "Registration Date can not be null")
     private String registrationDate;
 
     public @NotBlank(message = "Address can not be blank") String getAddress() {
@@ -56,11 +57,11 @@ public class PatientRequestDTO {
         this.name = name;
     }
 
-    public @NotNull(message = "Registration Date can not be null") String getRegistrationDate() {
+    public String getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(@NotNull(message = "Registration Date can not be null") String registrationDate) {
+    public void setRegistrationDate (String registrationDate) {
         this.registrationDate = registrationDate;
     }
 
