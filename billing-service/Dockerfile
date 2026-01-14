@@ -17,8 +17,11 @@ FROM eclipse-temurin:21-jre
 WORKDIR /app
 
 # 3️⃣ Copy only the jar (small image)
-COPY --from=builder /app/target/patient-service-*.jar app.jar
+COPY --from=builder /app/target/*.jar app.jar
 
-EXPOSE 8080
+
+
+EXPOSE 8081
+EXPOSE 9090
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
