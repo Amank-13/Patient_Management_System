@@ -26,11 +26,19 @@ public class KafkaProducer {
                 .setEventType("PATIENT_CREATED")
                 .build();
 
-        try{
-            kafkaTemplate.send("patient", event.toByteArray());
-        } catch (Exception e) {
-            log.error("Error sending PatientCreated event to Kafka: {}", event);
-        }
+
+            kafkaTemplate.send("patient", event.toByteArray())
+                    .thenAccept(result -> log.info(
+                            "✅ PRODUCED -> topic={}, partition={}, offset={}",
+                            result.getRecordMetadata().topic(),
+                            result.getRecordMetadata().partition(),
+                            result.getRecordMetadata().offset()
+                    ))
+                    .exceptionally(ex -> {
+                        log.error("Error sending PatientCreated event to Kafka: {}", event);
+                        return null;
+                    });
+
     }
 
 }

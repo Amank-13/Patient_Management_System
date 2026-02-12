@@ -1,0 +1,14 @@
+// Size: 174 B
+### updates an existing patient entity
+PUT http://localhost:8080/api/patients/updatePatient/123e4567-e89b-12d3-a456-426614174002 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Content-Length: 174
+
+{
+  "id": "123e4567-e89b-12d3-a456-426614174000",
+  "name": "Aman k",
+  "email": "aman@example.com",
+  "address": "123 Main St, Springfield",
+  "dateOfBirth": "1985-01-13"
+}

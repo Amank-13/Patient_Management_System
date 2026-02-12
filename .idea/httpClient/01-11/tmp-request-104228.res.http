@@ -1,0 +1,12 @@
+// Status: 400, time: 1,186ms, size: 34 B
+### request
+POST http://localhost:4000/api/patients/addPatient HTTP/1.1
+connection: close
+content-type: application/json
+date: Sun, 11 Jan 2026 17:12:28 GMT
+transfer-encoding: chunked
+
+{
+  "message": "email already exists"
+}
+>> C:\dev\intellij_projects\Patient_Management_System\.idea\httpClient\01-11\request\2026-01-11T224228.json

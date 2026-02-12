@@ -1,0 +1,15 @@
+// Status: 200, time: 1,813ms, size: 164 B
+### request
+POST http://localhost:4000/api/patients/addPatient HTTP/1.1
+content-type: application/json
+date: Tue, 10 Feb 2026 17:09:57 GMT
+transfer-encoding: chunked
+
+{
+  "id": "38f3dcac-8aaa-4b27-a8e8-84f3f63a1558",
+  "name": "kafka_test3",
+  "email": "kafka_test3@example.com",
+  "address": "123 Main St, Springfield",
+  "dateOfBirth": "1985-01-13"
+}
+>> C:\dev\intellij_projects\Patient_Management_System\.idea\httpClient\02-10\request\2026-02-10T223957.json

@@ -1,0 +1,5 @@
+// Size: 0 B
+### HTTP Request ▏#1
+DELETE http://localhost:8080/api/patients//deletePatient/123e4567-e89b-12d3-a456-426614174002 HTTP/1.1
+Content-Length: 0
+

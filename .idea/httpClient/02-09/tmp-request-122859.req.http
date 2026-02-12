@@ -1,0 +1,14 @@
+// Size: 167 B
+### request
+POST http://localhost:4000/api/patients/addPatient HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Content-Length: 167
+
+{
+  "name": "Amonnnnn",
+  "email": "Amond2w@example.com",
+  "address": "123 Main St, Springfield",
+  "dateOfBirth": "1985-01-13",
+  "registrationDate": "2025-11-03"
+}

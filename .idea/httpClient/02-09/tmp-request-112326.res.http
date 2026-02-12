@@ -1,0 +1,15 @@
+// Status: 200, time: 9,707ms, size: 150 B
+### request
+POST http://localhost:4000/api/patients/addPatient HTTP/1.1
+content-type: application/json
+date: Mon, 09 Feb 2026 17:53:25 GMT
+transfer-encoding: chunked
+
+{
+  "id": "5b30e3fe-1479-4aa7-80f2-3ec0b96240ed",
+  "name": "Am557",
+  "email": "Am5@example.com",
+  "address": "123 Main St, Springfield",
+  "dateOfBirth": "1985-01-13"
+}
+>> C:\dev\intellij_projects\Patient_Management_System\.idea\httpClient\02-09\request\2026-02-09T232326.json

@@ -1,0 +1,15 @@
+// Status: 200, time: 86ms, size: 152 B
+### updates an existing patient entity
+PUT http://localhost:8080/api/patients/updatePatient/123e4567-e89b-12d3-a456-426614174002 HTTP/1.1
+content-type: application/json
+date: Thu, 11 Dec 2025 05:05:00 GMT
+transfer-encoding: chunked
+
+{
+  "id": "123e4567-e89b-12d3-a456-426614174002",
+  "name": "Aman k",
+  "email": "aman@example.com",
+  "address": "123 Main St, Springfield",
+  "dateOfBirth": "1985-01-13"
+}
+>> C:\Users\amank\OneDrive\Documents\intellij_projects\Patient_Management_System\.idea\httpClient\12-11\updates an existing patient entity\2025-12-11T103500.json

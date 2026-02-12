@@ -19,6 +19,6 @@ WORKDIR /app
 # 3️⃣ Copy only the jar (small image)
 COPY --from=builder /app/target/patient-service-*.jar app.jar
 
-EXPOSE 8080
+EXPOSE 4000
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
