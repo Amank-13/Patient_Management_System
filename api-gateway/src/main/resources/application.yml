@@ -4,10 +4,25 @@ server:
 jwt:
   secret: 3365650306d60f3674110daab3cb3a74818970e4a502506c6d744ffda66ca352
 
-
 spring:
   cloud:
     gateway:
+
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:4200"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
       routes:
         - id: auth-service-route
           uri: http://auth-service:4005
@@ -15,7 +30,6 @@ spring:
             - Path=/auth/**
           filters:
             - StripPrefix=1
-
 
         - id: patient-service-route
           uri: http://patient-service:4000

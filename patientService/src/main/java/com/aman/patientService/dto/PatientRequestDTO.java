@@ -5,9 +5,12 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PatientRequestDTO {
 
+    Logger logger = LoggerFactory.getLogger(PatientRequestDTO.class);
     @NotBlank(message = "Name can not be blank")
     @Size(max = 100, message = "Name can not exceed 100 characters")
     private String name;

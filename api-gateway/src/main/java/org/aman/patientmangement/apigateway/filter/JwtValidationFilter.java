@@ -16,6 +16,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import java.util.List;
 import reactor.core.publisher.Mono;
+import org.springframework.http.HttpMethod;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
@@ -41,6 +42,10 @@ public class JwtValidationFilter implements WebFilter {
 
 
         String path = exchange.getRequest().getURI().getPath();
+
+        if (exchange.getRequest().getMethod() == HttpMethod.OPTIONS) {
+            return chain.filter(exchange);
+        }
 
         System.out.println("PATH = " + path);
         System.out.println("AUTH HEADER = " +

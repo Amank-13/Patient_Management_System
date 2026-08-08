@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.aman.patientmangement.authservice.dto.LoginRequestDTO;
 import org.aman.patientmangement.authservice.dto.LoginResponseDTO;
 import org.aman.patientmangement.authservice.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @RestController
 public class AuthController {
 
+    @Autowired
     private final AuthService authService;
 
     public AuthController(AuthService authService) {
