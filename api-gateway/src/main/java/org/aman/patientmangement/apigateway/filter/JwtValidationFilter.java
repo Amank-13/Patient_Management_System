@@ -31,10 +31,6 @@ public class JwtValidationFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
 
-        System.out.println("🔥 JwtValidationFilter HIT");
-
-
-
         byte[] keyBytes = Base64.getDecoder().decode(jwtSecret.getBytes(StandardCharsets.UTF_8));
 
         Key key = Keys.hmacShaKeyFor(keyBytes);

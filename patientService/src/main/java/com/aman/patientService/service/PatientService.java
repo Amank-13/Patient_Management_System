@@ -8,6 +8,7 @@ import com.aman.patientService.exception.PatientNotFoundException;
 import com.aman.patientService.grpc.BillingServiceGrpcClient;
 import com.aman.patientService.kafka.KafkaProducer;
 import com.aman.patientService.mapper.PatientMapper;
+import com.aman.patientService.model.Appointments;
 import com.aman.patientService.model.Patient;
 import com.aman.patientService.repository.PatientRepository;
 import org.springframework.stereotype.Service;
@@ -45,11 +46,17 @@ public class PatientService {
             throw new EmailAlreadyExistsException("A patient with this Email " + "already exists" + patientRequestDTO.getEmail());
         }
 
-        Patient savedPatient = patientRepository.save(PatientMapper.toEntity(patientRequestDTO));
-        // Call Billing Service to create billing account
-        billingServiceGrpcClient.createBillingAccount(savedPatient.getId().toString(), savedPatient.getName(), savedPatient.getEmail());
+        Patient patient = PatientMapper.toEntity(patientRequestDTO);
 
-        kafkaProducer.sendEvent(savedPatient);
+        for (Appointments appointment : patient.getAppointments()) {
+            appointment.setPatient(patient);
+        }
+
+        Patient savedPatient = patientRepository.save(patient);
+        // Call Billing Service to create billing account
+       // billingServiceGrpcClient.createBillingAccount(savedPatient.getPatientId().toString(), savedPatient.getName(), savedPatient.getEmail());
+
+       // kafkaProducer.sendEvent(savedPatient);
         return PatientMapper.toDTO(savedPatient);
     }
 
@@ -57,7 +64,7 @@ public class PatientService {
 
         Patient patient = patientRepository.findById(patientId).orElseThrow(() -> new PatientNotFoundException("Patient not found with id: " + patientId));
         {
-            if (patientRepository.existsByEmailAndIdNot(patientRequestDTO.getEmail(), patientId)) {
+            if (patientRepository.existsByEmailAndPatientIdIsNot(patientRequestDTO.getEmail(), patientId)) {
                 throw new EmailAlreadyExistsException("A patient with this Email " + "already exists" + patientRequestDTO.getEmail());
             }
 
@@ -73,5 +80,8 @@ public class PatientService {
         patientRepository.deleteById(patientId);
     }
 
+    public List<Patient> getActivePatients() {
+        return patientRepository.findByIsActiveTrue();
+    }
 }
 

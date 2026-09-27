@@ -1,8 +1,10 @@
 package com.aman.patientService.controller;
 
+import com.aman.patientService.dto.DashboardStatusDto;
 import com.aman.patientService.dto.PatientRequestDTO;
 import com.aman.patientService.dto.PatientResponseDTO;
 import com.aman.patientService.dto.validators.CreatePatientValidationGroup;
+import com.aman.patientService.service.DashboardStatusService;
 import com.aman.patientService.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,8 +23,11 @@ public class PatientController {
 
     private final PatientService patientService;
 
-    public PatientController(PatientService patientService) {
+    private final DashboardStatusService dasboardStatusService;
+
+    public PatientController(PatientService patientService, DashboardStatusService dasboardStatusService) {
         this.patientService = patientService;
+        this.dasboardStatusService = dasboardStatusService;
     }
 
     @GetMapping("/getPatients")
@@ -54,5 +59,12 @@ public class PatientController {
     public ResponseEntity<Void> deletePatient(@PathVariable("patientId") UUID patientId) {
         patientService.deletePatient(patientId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/getStats")
+    @Operation(summary = "get stats",description ="provide dashboard statics in ui" )
+    public ResponseEntity<DashboardStatusDto>  getStats() {
+        DashboardStatusDto dashboardStatusDto = dasboardStatusService.getStatus();
+        return ResponseEntity.ok().body(dashboardStatusDto);
     }
 }
