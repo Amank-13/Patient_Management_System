@@ -2,6 +2,7 @@ package com.aman.patientService.service;
 
 
 import com.aman.patientService.dto.DashboardStatusDto;
+import com.aman.patientService.mapper.AppointmentMapper;
 import com.aman.patientService.mapper.DashboardMapper;
 import com.aman.patientService.model.Appointments;
 import com.aman.patientService.model.DashboardStatus;
@@ -20,6 +21,7 @@ public class DashboardStatusService {
 
     PatientService patientService;
 
+
     public DashboardStatusService(PatientRepository patientRepository,PatientService patientService){
         this.patientRepository=patientRepository;
         this.patientService = patientService;
@@ -33,7 +35,7 @@ public class DashboardStatusService {
 
         List<Patient> patients = patientRepository.getStatus();
 
-        List<Patient> todayAppointments = patients.stream()
+        List<Patient> patientsHavingTodayAppointment = patients.stream()
                 .filter(p -> p.getAppointments().stream()
                         .anyMatch(a ->
                                 Objects.equals(a.getCreatedDate(), LocalDate.now())
@@ -57,10 +59,12 @@ public class DashboardStatusService {
                                 ))
                         .count()
         );
-        dashboardStatus.setNewPatients(todayAppointments.size());
-        dashboardStatus.setTodayAppointments(todayAppointments.stream()
+        dashboardStatus.setNewPatients(patientsHavingTodayAppointment.size());
+
+        AppointmentMapper appointmentMapper = new AppointmentMapper();
+        dashboardStatus.setTodayAppointments(appointmentMapper.toDTOList(patientsHavingTodayAppointment.stream()
                 .flatMap(p -> p.getAppointments().stream())
-                .toList());
+                .toList()));
         return dashboardMapper.toDTO(dashboardStatus);
 
     }

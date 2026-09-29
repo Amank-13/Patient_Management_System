@@ -1,5 +1,7 @@
 package com.aman.patientService.model;
 
+import com.aman.patientService.dto.AppointmentsDto;
+
 import java.util.List;
 
 public class DashboardStatus {
@@ -7,6 +9,9 @@ public class DashboardStatus {
     private long totalPatients;
     private long activePatients;
     private long newPatients;
+    private long criticalPatients;
+    private List<AppointmentsDto> todayAppointments;
+
 
     public long getCriticalPatients() {
         return criticalPatients;
@@ -16,8 +21,6 @@ public class DashboardStatus {
         this.criticalPatients = criticalPatients;
     }
 
-    private long criticalPatients;
-    private List<Appointments> todayAppointments;
 
     public long getTotalPatients() {
         return totalPatients;
@@ -27,11 +30,11 @@ public class DashboardStatus {
         this.totalPatients = totalPatients;
     }
 
-    public List<Appointments> getTodayAppointments() {
+    public List<AppointmentsDto> getTodayAppointments() {
         return todayAppointments;
     }
 
-    public void setTodayAppointments(List<Appointments> todayAppointments) {
+    public void setTodayAppointments(List<AppointmentsDto> todayAppointments) {
         this.todayAppointments = todayAppointments;
     }
 

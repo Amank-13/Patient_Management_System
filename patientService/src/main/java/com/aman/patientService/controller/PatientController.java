@@ -40,7 +40,7 @@ public class PatientController {
 
     @PostMapping("/addPatient")
     @Operation(summary = "Add New Patient", description = "Add a new patient to the system")
-    public ResponseEntity<PatientResponseDTO> addPatient(@Validated({Default.class, CreatePatientValidationGroup.class}) @RequestBody PatientRequestDTO patientRequestDTO) {
+    public ResponseEntity<PatientResponseDTO> addPatient(@Validated({Default.class, CreatePatientValidationGroup.class}) @RequestBody List<PatientRequestDTO> patientRequestDTO) {
         PatientResponseDTO patientResponseDTO = patientService.savePatient(patientRequestDTO);
 
         return ResponseEntity.ok().body(patientResponseDTO);

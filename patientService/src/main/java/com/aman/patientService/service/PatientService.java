@@ -40,24 +40,33 @@ public class PatientService {
                 .map(PatientMapper::toDTO).toList();
     }
 
-    public PatientResponseDTO savePatient(PatientRequestDTO patientRequestDTO)
+    public PatientResponseDTO savePatient(List<PatientRequestDTO> patientRequestDTOs)
     {
-        if(patientRepository.existsByEmail(patientRequestDTO.getEmail())){
-            throw new EmailAlreadyExistsException("A patient with this Email " + "already exists" + patientRequestDTO.getEmail());
+        Patient savedPatient = null;
+
+        for (PatientRequestDTO patientRequestDTO : patientRequestDTOs) {
+            if(patientRepository.existsByEmail(patientRequestDTO.getEmail())){
+                throw new EmailAlreadyExistsException("A patient with this Email " + "already exists" + patientRequestDTO.getEmail());
+            }
+            Patient patient = PatientMapper.toEntity(patientRequestDTO);
+
+            for (Appointments appointment : patient.getAppointments()) {
+                appointment.setPatient(patient);
+            }
+
+            savedPatient = patientRepository.save(patient);
+            // Call Billing Service to create billing account
+            // billingServiceGrpcClient.createBillingAccount(savedPatient.getPatientId().toString(), savedPatient.getName(), savedPatient.getEmail());
+
+            // kafkaProducer.sendEvent(savedPatient);
+
         }
 
-        Patient patient = PatientMapper.toEntity(patientRequestDTO);
-
-        for (Appointments appointment : patient.getAppointments()) {
-            appointment.setPatient(patient);
+        if(savedPatient == null){
+            throw new RuntimeException("No patients were saved.");
         }
-
-        Patient savedPatient = patientRepository.save(patient);
-        // Call Billing Service to create billing account
-       // billingServiceGrpcClient.createBillingAccount(savedPatient.getPatientId().toString(), savedPatient.getName(), savedPatient.getEmail());
-
-       // kafkaProducer.sendEvent(savedPatient);
         return PatientMapper.toDTO(savedPatient);
+
     }
 
     public  PatientResponseDTO updatePatient(PatientRequestDTO  patientRequestDTO, UUID patientId) {
@@ -71,7 +80,7 @@ public class PatientService {
             patient.setName(patientRequestDTO.getName());
             patient.setEmail(patientRequestDTO.getEmail());
             patient.setAddress(patientRequestDTO.getAddress());
-            patient.setDateOfBirth(java.time.LocalDate.parse(patientRequestDTO.getDateOfBirth()));
+            patient.setDateOfBirth(patientRequestDTO.getDateOfBirth());
             Patient updatedPatient = patientRepository.save(patient);
             return PatientMapper.toDTO(updatedPatient);
         }

@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class PatientRequestDTO {
@@ -27,10 +28,10 @@ public class PatientRequestDTO {
     private String address;
 
     @NotBlank(message = "Date of Birth can not be blank")
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @NotBlank(groups = CreatePatientValidationGroup.class, message = "Registration Date can not be null")
-    private String registrationDate;
+    private LocalDate registrationDate;
 
     @NotNull
     private Boolean isActive ;
@@ -65,19 +66,19 @@ public class PatientRequestDTO {
         this.address = address;
     }
 
-    public String getDateOfBirth() {
+    public @NotBlank(message = "Date of Birth can not be blank") LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getRegistrationDate() {
+    public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(String registrationDate) {
+    public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
     }
 

@@ -10,7 +10,7 @@ public class DashboardStatusDto {
     private long totalPatients;
     private long critical;
     private long newPatients;
-    private List<Appointments> todayAppointments;
+    private List<AppointmentsDto> todayAppointments;
     private  long ActivePatients;
 
     public long getTotalPatients() {
@@ -37,11 +37,11 @@ public class DashboardStatusDto {
         this.newPatients = newPatients;
     }
 
-    public List<Appointments> getTodayAppointments() {
+    public List<AppointmentsDto> getTodayAppointments() {
         return todayAppointments;
     }
 
-    public void setTodayAppointments(List<Appointments> todayAppointments) {
+    public void setTodayAppointments(List<AppointmentsDto> todayAppointments) {
         this.todayAppointments = todayAppointments;
     }
 
